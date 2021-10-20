@@ -1,12 +1,13 @@
 import React from "react";
+import classes from'./Input.css'
 
 
 const Input = (props)=>{
     let inputElement = null;
-    const inputClasses = [];
+    const inputClasses = [classes.InputElement];
 
-    if(props.invalid&&props.touched&& props.shouldValidate){
-        inputClasses.push("invalid");
+    if(props.invalid&&props.touched){
+        inputClasses.push(classes.invalid);
     }
 
     switch (props.elementType){
@@ -37,7 +38,7 @@ const Input = (props)=>{
                 className={inputClasses.join(' ')}
                 {...props.elementConfig}
                 value={props.value}
-                onChange={props.changed} />;
+                onChange={props.change} />;
     }
 
     return(

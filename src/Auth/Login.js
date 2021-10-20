@@ -1,5 +1,8 @@
 import React,{Component} from "react";
 import {connect} from "react-redux";
+import {NavLink} from "react-router-dom";
+import {login} from "./Action/AuthAction";
+import './Login.css'
 
 class Login extends Component{
     constructor(props) {
@@ -41,14 +44,15 @@ class Login extends Component{
 
     onSubmitHandler(event){
         event.preventDefault();
-
+        console.log("in submit handler")
         const {username,password} = this.state;
-        this.props.login(username,password);
+        this.props.Login(username,password);
     }
 
     render() {
         const {username,password} = this.state;
         const hasError = this.validate(username,password);
+        const show = !Object.keys(hasError).some(x => hasError[x])
 
         const showError = (field)=>{
             const error = hasError[field];
@@ -57,7 +61,8 @@ class Login extends Component{
         }
 
         return(
-            <div>
+            <div style={{'text-align': 'center'}}>
+                <h1>Login</h1>
             <form onSubmit={this.onSubmitHandler}>
                 <div>
                 <input
@@ -73,7 +78,7 @@ class Login extends Component{
                 <div>
                     <input
                         type="text"
-                        className={"input_form"+(showError('password'?"error":""))}
+                        className={"input_form"+(showError('password')?"error":"")}
                         id="password"
                         name="password"
                         value={this.state.password}
@@ -81,7 +86,8 @@ class Login extends Component{
                         onBlur={this.onBlurHandler('password')}
                     />
                 </div>
-                <button disabled={!hasError['username']&&!hasError['password']} type="submit">Login</button>
+                <button disabled={!show} type="submit">Login</button>
+                <NavLink to='/register' role='button'>Register</NavLink>
             </form>
             </div>
         )
@@ -90,8 +96,18 @@ class Login extends Component{
 
 const mapDispatchToProps= dispatch =>{
     return{
-        login:(username,password)=>dispatch(login(username,password))
+        Login:(username,password)=>dispatch(login(username,password))
+        // Login:(username,password)=>login(username,password)
     }
 }
 
-export default connect(null,mapDispatchToProps)(Login);
+const mapStateToProps = state=>{
+    return{
+        token:state.token,
+        isLoggedIn:state.token!==null,
+        error:state.err,
+        loginSuccess:state.loginSuccess
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Login);
