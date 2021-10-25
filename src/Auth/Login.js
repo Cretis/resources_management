@@ -61,7 +61,7 @@ class Login extends Component{
         }
 
         return(
-            <div style={{'text-align': 'center'}}>
+            <div style={{textAlign: 'center'}}>
                 <h1>Login</h1>
             <form onSubmit={this.onSubmitHandler}>
                 <div>
@@ -103,10 +103,10 @@ const mapDispatchToProps= dispatch =>{
 
 const mapStateToProps = state=>{
     return{
-        token:state.token,
-        isLoggedIn:state.token!==null,
-        error:state.err,
-        loginSuccess:state.loginSuccess
+        token:state.auth.token,
+        isLoggedIn:state.auth.token!==null,
+        error:state.auth.err,
+        loginSuccess:state.auth.loginSuccess
     }
 }
 

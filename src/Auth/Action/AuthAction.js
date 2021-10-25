@@ -2,11 +2,12 @@ import axios from "axios";
 import * as actionTypes from'./ActionType'
 
 
-export const loginSuccess=(jwtToken,username)=>{
+export const loginSuccess=(jwtToken,username,timeCreated)=>{
     return {
         type:actionTypes.Login_Success,
         token:jwtToken,
-        username:username
+        username:username,
+        timeCreated:timeCreated
     };
 };
 
@@ -26,8 +27,11 @@ export const login = (username,password)=>{
         const url='http://localhost:8080/user/login'
         axios.post(url,loginData).then(response=>{
             console.log(response);
-            const jwt = response.data
-            dispatch(loginSuccess(jwt,username))
+            const jwt = response.data.jwt;
+            localStorage.removeItem("token");
+            localStorage.setItem("token",jwt);
+            const timeCreated = response.data.time
+            dispatch(loginSuccess(jwt,username,timeCreated));
         }).catch(err=>{
             dispatch(loginError(err))
         })
@@ -68,5 +72,11 @@ export const register = (userData)=>{
             console.log(err);
             dispatch(registerFail());
         })
+    }
+}
+
+export const signOut = ()=>{
+    return{
+        type:actionTypes.sign_out
     }
 }

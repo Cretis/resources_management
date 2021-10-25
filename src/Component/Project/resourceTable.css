@@ -1,0 +1,11 @@
+.myTable tbody{
+    overflow-y: scroll;
+}
+
+.myTable thead, tbody tr{
+    table-layout: fixed;
+}
+
+.myTable thead tr th{
+    text-align: center;
+}

@@ -1,0 +1,28 @@
+.back{
+    display: inline-block;
+    width: 700px;
+}
+.hide{
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.show{
+    display: block;
+    position: absolute;
+    right: 50px;
+    top:20px;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.butt{
+    float: right;
+}

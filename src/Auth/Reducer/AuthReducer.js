@@ -6,7 +6,8 @@ const initialState={
     username:null,
     registerSuccess:null,
     loginSuccess:false,
-    err:null
+    err:null,
+    createdTime:null
 }
 
 const loginSuccess=(state,action)=>{
@@ -14,7 +15,8 @@ const loginSuccess=(state,action)=>{
         username:action.username,
         token:action.token,
         loginSuccess:true,
-        registerSuccess: null})
+        registerSuccess: null,
+        createdTime: action.timeCreated})
 }
 
 const loginFail=(state,action)=>{
@@ -29,16 +31,21 @@ const registerFail = (state,action)=>{
     return Object.assign({},state,{registerSuccess:false})
 }
 
-const reducer=(state=initialState,action)=>{
+const signOut = (state,action)=>{
+    return Object.assign({},state,{loginSuccess:false})
+}
+
+const AuthReducer=(state=initialState,action)=>{
     switch (action.type){
         case actionTypes.Login_Success:return loginSuccess(state,action);
         case actionTypes.Login_Fail:return loginFail(state,action);
         case actionTypes.Register_Success:return registerSuccess(state,action);
         case actionTypes.Register_Fail:return registerFail(state,action);
+        case actionTypes.sign_out: return signOut(state,action);
         default:
             return state;
     }
 
 };
 
-export default reducer;
+export default AuthReducer;

@@ -1,11 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
-import React,{Component} from "react";
+import React, {Component, Fragment} from "react";
 import {Redirect, Route, Switch, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import Login from "./Auth/Login";
 import Register from "./Auth/Register";
-import Welcome from"./Component/Welcome"
+import Resources from "./Component/Resources";
+import Project from "./Component/Project";
+import Top from "./Component/Top";
+import Menu from "./Component/Menu";
 
 
 class App extends Component {
@@ -21,14 +23,24 @@ class App extends Component {
       if(this.props.loginSuccess){
           routes=(
           <Switch>
-              <Route path='/welcome' component={Welcome}/>
-              <Redirect to="/welcome"/>
+              <Route path='/resource' component={Resources}/>
+              <Route path='/project' component={Project}/>
+              <Redirect to="/project"/>
           </Switch>
           )
       }
+
+      let log = (<span>not logged</span>)
+      if(this.props.loginSuccess) {
+          log = (<span/>)
+      }
     return (
         <div>
-          {routes}
+            <Menu/><Fragment>
+            <div><Top/>{log}</div>
+            {routes}
+        </Fragment>
+
         </div>
     );
   }
@@ -36,9 +48,9 @@ class App extends Component {
 
 const mapStateToProps = state=>{
     return{
-        token:state.token,
-        error:state.err,
-        loginSuccess:state.loginSuccess
+        token:state.auth.token,
+        error:state.auth.err,
+        loginSuccess:state.auth.loginSuccess,
     }
 }
 export default withRouter(connect(mapStateToProps,null)(App));

@@ -8,11 +8,15 @@ import {createStore,compose,applyMiddleware,combineReducers} from 'redux'
 import thunk from "redux-thunk";
 import {BrowserRouter} from "react-router-dom";
 import AuthReducer from "./Auth/Reducer/AuthReducer";
+import ResourcesReducer from "./Reducer/ResourcesReducer";
+import ProjectReducer from "./Reducer/ProjectReducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-    Auth:AuthReducer
+    auth:AuthReducer,
+    res:ResourcesReducer,
+    pro:ProjectReducer
 });
 
 const store = createStore(rootReducer,composeEnhancers(
