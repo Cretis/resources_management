@@ -28,7 +28,6 @@ export const loadAll= (projectId)=>{
                 //     name:resource.resourceName,
                 //     id:resource.resourceId
                 // })
-                console.log(resource)
                 return(
                     allResource=[
                         ...allResource,
@@ -48,8 +47,6 @@ export const loadAll= (projectId)=>{
                     })
                 })
                 console.log("inLoadAll")
-                console.log(allResource[0])
-                console.log(allResource)
                 console.log(addedResource)
                 dispatch(loadAllSuccess(allResource,addedResource))
             }).catch(err=>{
@@ -88,6 +85,23 @@ export const loadProject=(username)=>{
 
 }
 
-export const addResource=(resourceList)=>{
 
+export const addResource=(resourceList,projectId)=>{
+    return dispatch=>{
+        let resourceIdList=[];
+        resourceList.forEach(resource=>{
+            resourceIdList.push(resource.resourceId);
+        })
+
+        const addResourceUrl="http://localhost:8080/project/addresources"
+        axios.post(addResourceUrl,{resources:resourceIdList,projectId:projectId},{headers: {"Authorization": "Bearer " + localStorage.getItem("token")}}).then(
+            response=>{
+                if(response.data==="add Successful"){
+                    console.log("before loadAll")
+                    dispatch(loadAll(projectId));
+                }
+            }
+        )
+
+    }
 }

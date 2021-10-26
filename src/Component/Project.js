@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import {connect} from "react-redux";
-import {loadAll, loadProject} from "../Action/ProjectAction";
+import {addResource, loadAll, loadProject} from "../Action/ProjectAction";
 import AllResources from "./Project/AllResources";
 import AddResources from "./Project/AddResources";
 
@@ -100,7 +100,8 @@ class Project extends Component{
     }
 
     submitOnClick=(event)=>{
-
+        this.props.addResource(this.state.willAddResource,this.props.project.projectId);
+        this.setState({willAddResource:[]})
     }
 
     render() {
@@ -131,14 +132,15 @@ const mapStateToProps=state=>{
         username:state.auth.username,
         project:state.pro.currentProject,
         allResource: state.pro.allResource,
-        addedResource:state.pro.addedResource
+        addedResource:state.pro.addedResource,
     }
 }
 
 const mapDispatchToProps=dispatch=>{
     return{
         loadProject:(username)=>dispatch(loadProject(username)),
-        loadAll:(projectId)=>dispatch(loadAll(projectId))
+        loadAll:(projectId)=>dispatch(loadAll(projectId)),
+        addResource:(resources,projectId)=>dispatch(addResource(resources,projectId))
     }
 }
 
