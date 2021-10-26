@@ -10,6 +10,10 @@ const initialState={
 
 
 const load_All_Resources=(state,action)=>{
+    console.log("inReducer")
+    console.log()
+    console.log(action.allResource)
+    console.log(action.allResource[0])
     return Object.assign({},state,{allResource: action.allResource,addedResource: action.addedResource})
 }
 

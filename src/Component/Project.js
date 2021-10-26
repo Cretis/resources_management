@@ -10,10 +10,14 @@ class Project extends Component{
 
         this.state={
             checkBoxSelectList:[],
-            willAddResource:[]
+            willAddResource:[],
+            cancelCheckBoxSelectList:[]
         }
         this.checkBoxClickHandler = this.checkBoxClickHandler.bind(this);
         this.addClickHandler=this.addClickHandler.bind(this);
+        this.deleteClickHandler=this.deleteClickHandler.bind(this);
+        this.addResourcesTableCheckBoxClickHandler=this.addResourcesTableCheckBoxClickHandler.bind(this);
+        this.submitOnClick=this.submitOnClick.bind(this);
     }
 
     componentDidMount() {
@@ -24,27 +28,78 @@ class Project extends Component{
         this.setState({willAddResource:this.state.checkBoxSelectList});
     }
 
+    deleteClickHandler=(event)=>{
+        console.log("in delete CLick")
+        const willAdd = this.state.willAddResource;
+        console.log(willAdd);
+        let deleteList=[];
+        for(let key in willAdd){
+            this.state.cancelCheckBoxSelectList.forEach(resource=>{
+                if(willAdd[key].resourceId===resource.resourceId){
+                    deleteList.push(key);
+                }
+            })
+        }
+        deleteList.forEach(key=>{
+            willAdd.splice(key,1);
+        })
+        console.log(willAdd)
+        this.setState({willAddResource:willAdd,cancelCheckBoxSelectList:[]})
+    }
+
     checkBoxClickHandler=(event)=>{
-        if(event.target.value===true){
+        console.log("event:")
+        console.log(event)
+        if(event.target.checked===true){
             this.setState({checkBoxSelectList:[
                 ...this.state.checkBoxSelectList,
                     {
-                        projectId:event.target.getAttribute("data-id"),
-                        projectName:event.target.getAttribute("data-name")
+                        resourceId:event.target.getAttribute("data-id"),
+                        resourceName:event.target.getAttribute("data-name")
                     }
                 ]})
+            console.log("in check box true")
+            console.log(this.state.checkBoxSelectList)
         }else {
             let checkBoxSelect = this.state.checkBoxSelectList;
             for(let key in checkBoxSelect){
-                if(checkBoxSelect[key].projectId===event.target.getAttribute("data-id")){
+                console.log(key)
+                console.log(checkBoxSelect[key].resourceId)
+                console.log(event.target.getAttribute("data-id"))
+                if(checkBoxSelect[key].resourceId===event.target.getAttribute("data-id")){
                     checkBoxSelect.splice(key,1);
                 }
             }
+            console.log("in checkbox false")
+            console.log(checkBoxSelect)
             this.setState({checkBoxSelectList:checkBoxSelect})
         }
     }
 
-    trashOnClick=(event)=>{
+    addResourcesTableCheckBoxClickHandler=(event)=>{
+        console.log("in add check box click")
+        console.log(event)
+        if(event.target.checked===true){
+            this.setState({cancelCheckBoxSelectList:[
+                    ...this.state.cancelCheckBoxSelectList,
+                    {
+                        resourceId:event.target.getAttribute("data-id"),
+                        resourceName:event.target.getAttribute("data-name")
+                    }
+                ]});
+        }else {
+            let checkBoxSelect = this.state.cancelCheckBoxSelectList;
+            for(let key in checkBoxSelect){
+                if(checkBoxSelect[key].resourceId===event.target.getAttribute("data-id")){
+                    checkBoxSelect.splice(key,1);
+                }
+            }
+            console.log("in add checkbox false")
+            this.setState({cancelCheckBoxSelectList:checkBoxSelect})
+        }
+    }
+
+    submitOnClick=(event)=>{
 
     }
 
@@ -61,7 +116,10 @@ class Project extends Component{
                 /><AddResources
                     addedResource={this.props.addedResource}
                     willaddedResource={this.state.willAddResource}
+                    onDeleteClick ={this.deleteClickHandler}
+                    checkBoxOnClick={this.addResourcesTableCheckBoxClickHandler}
                 />
+                <div><button onClick={this.submitOnClick}>submit</button></div>
             </div>
         )
     }

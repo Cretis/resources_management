@@ -139,8 +139,9 @@ export const loadAllResources = () => {
                     }
                 })
             })
-            // console.log("finalResourceList:")
-            // console.log(finalResourceList)
+            console.log("finalResourceList:")
+            console.log(finalResourceList)
+            console.log(finalResourceList[0])
             dispatch(loadSuccess(finalResourceList))
         })).catch(err => {
             dispatch(loadResourceDetailErr(err))

@@ -3,8 +3,6 @@ import React from "react";
 
 
 const AllResources = (props)=>{
-    console.log("in AllResources")
-    console.log(props.allResource)
     return(
         <div style={{display:"inline-block"}}>
             <h4 style={{display:"inline-block"}}>Resource Catalog</h4><i className={"bi-arrow-right-circle"} style={{cursor:"pointer"}} onClick={props.addOnClick}/>
@@ -19,10 +17,9 @@ const AllResources = (props)=>{
                 <tbody>
                 {
                     props.allResource.map((resource)=>{
-                        console.log("in body")
                         return(
                                 <tr key={resource.id}>
-                                    <td><input type="checkbox" data-id={resource.id} data-name={resource.name} onClick={props.checkBoxOnClick}/></td>
+                                    <td><input id={resource.id} type="checkbox" data-id={resource.id} data-name={resource.name} onClick={props.checkBoxOnClick}/></td>
                                     <td>{resource.name}</td>
                                     <td>{resource.id}</td>
                                 </tr>
