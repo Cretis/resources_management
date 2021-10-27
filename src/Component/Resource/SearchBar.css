@@ -11,6 +11,7 @@
 .show{
     display:block;
     position: absolute;
+    left: 150px;
     background-color: #f9f9f9;
     min-width: 160px;
     overflow: auto;

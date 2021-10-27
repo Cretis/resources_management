@@ -3,9 +3,7 @@ import axios from "axios";
 
 
 export const loadAllSuccess=(allResources,addedResources)=>{
-    console.log("inloadALlSuccess");
-    console.log(allResources)
-    console.log(allResources[0])
+
     return{
         type:actionType.load_All_Resources_On_Project_Page_Success,
         allResource:allResources,
@@ -21,8 +19,6 @@ export const loadAll= (projectId)=>{
         const loadAddedResourcesUrl="http://localhost:8080/project/getprojectresources"
         axios.get(loadAllResourcesUrl,{headers: {"Authorization": "Bearer " + localStorage.getItem("token")}}).then(response=>{
             const resourceList = response.data;
-            console.log("response:")
-            console.log(resourceList)
             resourceList.map(resource=>{
                 // allResource.push({
                 //     name:resource.resourceName,
@@ -46,8 +42,6 @@ export const loadAll= (projectId)=>{
                         id:resource.resourceId
                     })
                 })
-                console.log("inLoadAll")
-                console.log(addedResource)
                 dispatch(loadAllSuccess(allResource,addedResource))
             }).catch(err=>{
                 console.log(err)
@@ -72,8 +66,7 @@ export const loadProject=(username)=>{
             projectList.forEach(project=>{
                 allProject.push(project);
             })
-            console.log("allproject:")
-            console.log(allProject)
+
             dispatch(loadProjectSuccess(allProject));
             dispatch(loadAll(allProject[0].projectId));
 
@@ -105,3 +98,34 @@ export const addResource=(resourceList,projectId)=>{
 
     }
 }
+
+export const deleteFromTable=(resourceList)=>{
+    return{
+        type:actionType.delete_from_table,
+        resourceList:resourceList
+    }
+}
+
+export const deleteResource=(resourceList,projectId)=>{
+    return dispatch=>{
+        console.log("in delete action:")
+        console.log(resourceList)
+        console.log(projectId)
+        const deleteResourceUrl="http://localhost:8080/project//removeResources"
+        let resourceIdList=[];
+        resourceList.forEach(resource=>{
+            resourceIdList.push(resource.resourceId)
+        })
+        axios.delete(deleteResourceUrl,{headers: {"Authorization": "Bearer " + localStorage.getItem("token")},data:{resources:resourceIdList,projectId:projectId}}).then(
+            response=>{
+                if(response.data==="delete successful"){
+                    dispatch(loadAll(projectId));
+                }
+
+            }
+        ).catch(err=>{
+            console.log(err)
+        })
+    }
+}
+

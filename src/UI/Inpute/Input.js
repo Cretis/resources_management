@@ -1,22 +1,30 @@
 import React from "react";
-import classes from'./Input.css'
+import './Input.css'
 
 
 const Input = (props)=>{
     let inputElement = null;
-    const inputClasses = [classes.InputElement];
+    const inputClasses = ['InputElement'];
+    const inputSpan=['hides'];
 
-    if(props.invalid&&props.touched){
-        inputClasses.push(classes.invalid);
+    if(!props.valid&&props.touched){
+        inputClasses.pop();
+        inputClasses.push('invalid');
+        inputSpan.pop();
+        inputSpan.push('shows')
+        console.log(inputClasses.join(''))
     }
 
     switch (props.elementType){
         case("input"):
-            inputElement=<input
-                className={inputClasses.join('')}
-                {...props.elementConfig}
-                value={props.value}
-                onChange={props.change}/>;
+            inputElement=<div>
+                <input
+                    className={inputClasses.join('')}
+                    {...props.elementConfig}
+                    value={props.value}
+                    onChange={props.change}/><span className={inputSpan.join('')}>{props.hint}</span>
+            </div>
+
             break;
         case('select'):
             inputElement = (

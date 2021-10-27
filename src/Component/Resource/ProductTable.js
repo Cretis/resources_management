@@ -9,10 +9,10 @@ const ProductTable = (props)=>{
     const columnNameClickHandler = (event)=>{
         console.log("event:")
         console.log(event)
-        if(event.target.parentElement.children[1].className==="show"){
-            event.target.parentElement.children[1].className="hide";
+        if(event.target.parentElement.children[1].className==="showt"){
+            event.target.parentElement.children[1].className="hidet";
         }else{
-            event.target.parentElement.children[1].className="show";
+            event.target.parentElement.children[1].className="showt";
         }
     }
 
@@ -22,13 +22,13 @@ const ProductTable = (props)=>{
         console.log(columnId);
         console.log(event);
         props.updateColumnName(columnId,newValue);
-        event.target.parentElement.parentElement.className="hide";
+        event.target.parentElement.parentElement.className="hidet";
     }
 
     const deleteColumnClickHandler=(event)=>{
         const columnId = event.target.getAttribute('data-id');
         props.deleteColumn(columnId);
-        event.target.parentElement.parentElement.className="hide";
+        event.target.parentElement.parentElement.className="hidet";
     }
 
     let column = (
@@ -45,8 +45,8 @@ const ProductTable = (props)=>{
                 {
                     props.resources[0].columns.map((column)=> {
                         return (
-                            <th key={column.columnName}>{column.columnName}<span style={{cursor:"pointer"}} onClick={columnNameClickHandler}>*</span>
-                                <div className="hide">
+                            <th key={column.columnName}>{column.columnName}<span className={"bi-caret-down-fill"} style={{cursor: "pointer",fontSize:"10px"}} onClick={columnNameClickHandler}/>
+                                <div className="hidet">
                                     <dl>
                                         <dt onClick={editColumnClickHandler} data-id={column.columnId} style={{cursor:"pointer"}}>edit column</dt>
                                         <dt onClick={deleteColumnClickHandler} data-id={column.columnId} style={{cursor:"pointer"}}>delete column</dt>

@@ -25,7 +25,7 @@ class App extends Component {
           <Switch>
               <Route path='/resource' component={Resources}/>
               <Route path='/project' component={Project}/>
-              <Redirect to="/project"/>
+              <Redirect to="/resource"/>
           </Switch>
           )
       }

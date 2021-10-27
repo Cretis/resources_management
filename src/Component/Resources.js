@@ -99,7 +99,7 @@ class Resources extends Component {
                     deleteColumn={this.props.deleteC}
                 />
                 <AddRow
-                    showAddRow = {this.state.showAddRow? "show":"hide"}
+                    showAddRow = {this.state.showAddRow? "showr":"hider"}
                     hideAddRow = {this.showAddRowHandler}
                     addRow = {this.props.addRow}
                 />

@@ -8,5 +8,6 @@ export const add_Column_Value_Success = "add_Column_Value_Success";
 
 export const load_All_Resources_On_Project_Page_Success = "load_All_Resources_On_Project_Page_Success"
 export const load_All_Project_Success="load_All_Project_Success"
+export const delete_from_table="delete_from_table"
 
 export const Search = "Search";

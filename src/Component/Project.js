@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import {connect} from "react-redux";
-import {addResource, loadAll, loadProject} from "../Action/ProjectAction";
+import {addResource, loadAll, loadProject,deleteFromTable,deleteResource} from "../Action/ProjectAction";
 import AllResources from "./Project/AllResources";
 import AddResources from "./Project/AddResources";
 
@@ -8,16 +8,19 @@ class Project extends Component{
     constructor(props) {
         super(props);
 
-        this.state={
-            checkBoxSelectList:[],
-            willAddResource:[],
-            cancelCheckBoxSelectList:[]
+        this.state= {
+            checkBoxSelectList: [],
+            willAddResource: [],
+            cancelCheckBoxSelectList: [],
+            willDeleteResource: [],
+            deleteCheckBoxSelectList: [],
         }
         this.checkBoxClickHandler = this.checkBoxClickHandler.bind(this);
         this.addClickHandler=this.addClickHandler.bind(this);
         this.deleteClickHandler=this.deleteClickHandler.bind(this);
         this.addResourcesTableCheckBoxClickHandler=this.addResourcesTableCheckBoxClickHandler.bind(this);
         this.submitOnClick=this.submitOnClick.bind(this);
+        this.deleteCheckBoxClickHandler=this.deleteCheckBoxClickHandler.bind(this);
     }
 
     componentDidMount() {
@@ -29,9 +32,7 @@ class Project extends Component{
     }
 
     deleteClickHandler=(event)=>{
-        console.log("in delete CLick")
         const willAdd = this.state.willAddResource;
-        console.log(willAdd);
         let deleteList=[];
         for(let key in willAdd){
             this.state.cancelCheckBoxSelectList.forEach(resource=>{
@@ -43,13 +44,14 @@ class Project extends Component{
         deleteList.forEach(key=>{
             willAdd.splice(key,1);
         })
-        console.log(willAdd)
-        this.setState({willAddResource:willAdd,cancelCheckBoxSelectList:[]})
+        this.setState({willAddResource:willAdd,cancelCheckBoxSelectList:[]});
+        console.log("in click handler")
+        console.log(this.state.deleteCheckBoxSelectList)
+        this.props.deleteFromTable(this.state.deleteCheckBoxSelectList);
+        this.setState({willDeleteResource:this.state.deleteCheckBoxSelectList})
     }
 
     checkBoxClickHandler=(event)=>{
-        console.log("event:")
-        console.log(event)
         if(event.target.checked===true){
             this.setState({checkBoxSelectList:[
                 ...this.state.checkBoxSelectList,
@@ -63,9 +65,6 @@ class Project extends Component{
         }else {
             let checkBoxSelect = this.state.checkBoxSelectList;
             for(let key in checkBoxSelect){
-                console.log(key)
-                console.log(checkBoxSelect[key].resourceId)
-                console.log(event.target.getAttribute("data-id"))
                 if(checkBoxSelect[key].resourceId===event.target.getAttribute("data-id")){
                     checkBoxSelect.splice(key,1);
                 }
@@ -99,9 +98,34 @@ class Project extends Component{
         }
     }
 
+    deleteCheckBoxClickHandler=(event)=>{
+        if(event.target.checked===true){
+            this.setState({deleteCheckBoxSelectList:[
+                    ...this.state.deleteCheckBoxSelectList,
+                    {
+                        resourceId:event.target.getAttribute("data-id"),
+                        resourceName:event.target.getAttribute("data-name")
+                    }
+                ]});
+        }else {
+            let checkBoxSelect = this.state.deleteCheckBoxSelectList;
+            for(let key in checkBoxSelect){
+                if(checkBoxSelect[key].resourceId===event.target.getAttribute("data-id")){
+                    checkBoxSelect.splice(key,1);
+                }
+            }
+            console.log("in add checkbox false")
+            this.setState({deleteCheckBoxSelectList:checkBoxSelect})
+        }
+    }
+
     submitOnClick=(event)=>{
+        console.log("in submit click")
+        console.log(this.state.willDeleteResource)
+        this.props.deleteResource(this.state.willDeleteResource,this.props.project.projectId);
+
         this.props.addResource(this.state.willAddResource,this.props.project.projectId);
-        this.setState({willAddResource:[]})
+        this.setState({willAddResource:[]});
     }
 
     render() {
@@ -119,6 +143,7 @@ class Project extends Component{
                     willaddedResource={this.state.willAddResource}
                     onDeleteClick ={this.deleteClickHandler}
                     checkBoxOnClick={this.addResourcesTableCheckBoxClickHandler}
+                    deleteCheckBoxClick={this.deleteCheckBoxClickHandler}
                 />
                 <div><button onClick={this.submitOnClick}>submit</button></div>
             </div>
@@ -140,7 +165,9 @@ const mapDispatchToProps=dispatch=>{
     return{
         loadProject:(username)=>dispatch(loadProject(username)),
         loadAll:(projectId)=>dispatch(loadAll(projectId)),
-        addResource:(resources,projectId)=>dispatch(addResource(resources,projectId))
+        addResource:(resources,projectId)=>dispatch(addResource(resources,projectId)),
+        deleteFromTable:(resourceList)=>dispatch(deleteFromTable(resourceList)),
+        deleteResource:(resourceList,projectId)=>dispatch(deleteResource(resourceList,projectId))
     }
 }
 

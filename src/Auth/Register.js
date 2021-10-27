@@ -58,7 +58,8 @@ class Register extends Component{
                     isEmail:true
                 },
                 valid:false,
-                touched:false
+                touched:false,
+                hint:"email must follow the email format"
             },
             phone:{
                 elementType:'input',
@@ -74,7 +75,8 @@ class Register extends Component{
                     minLength:10
                 },
                 valid:false,
-                touched:false
+                touched:false,
+                hint:"Phone number must be 10 digits"
             }
         },
         formIsValid:false
@@ -119,18 +121,18 @@ class Register extends Component{
     }
 
     inputChangeHandler=(event,id)=> {
-        const registerForms = {...this.state.registerForm};
-        const registerForm = {...registerForms[id]};
+        let registerForms = {...this.state.registerForm};
+        let registerForm = {...registerForms[id]};
         registerForm.value = event.target.value;
-        registerForm.valid = this.checkValidation(registerForm.value,registerForm.validation)
+        registerForm.valid = this.checkValidation(registerForm.value,registerForm.validation);
         registerForm.touched = true;
         registerForms[id]=registerForm;
-
+        console.log("in input change")
+        console.log(registerForm)
         let formValid = true;
         for(let key in registerForms){
             formValid= registerForms[key].valid && formValid;
         }
-
         this.setState({registerForm:{...registerForms},formIsValid:formValid})
     }
 
@@ -158,6 +160,7 @@ class Register extends Component{
                             valid={element.config.valid}
                             touched={element.config.touched}
                             change={(event)=> this.inputChangeHandler(event,element.id)}
+                            hint={element.config.hint}
                         />
                     ))
                 }

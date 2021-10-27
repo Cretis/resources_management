@@ -12,6 +12,7 @@ const AddResources = (props)=>{
             <table>
                 <thead>
                 <tr>
+                    <th> </th>
                     <th> name</th>
                     <th> id</th>
                 </tr>
@@ -21,7 +22,7 @@ const AddResources = (props)=>{
                         console.log("in added body")
                         return(
                             <tr key={resource.id}>
-                                <td> </td>
+                                <td><input type='checkbox' data-id={resource.id} data-name={resource.name} onClick={props.deleteCheckBoxClick}/></td>
                                 <td>{resource.name}</td>
                                 <td>{resource.id}</td>
                             </tr>
