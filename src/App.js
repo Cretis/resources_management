@@ -8,6 +8,8 @@ import Resources from "./Component/Resources";
 import Project from "./Component/Project";
 import Top from "./Component/Top";
 import Menu from "./Component/Menu";
+import Column from "./Component/Column";
+import EditColumn from "./Component/EditColumn";
 
 
 class App extends Component {
@@ -20,27 +22,29 @@ class App extends Component {
           <Redirect to="/login"/>
       </Switch>
     )
-      if(this.props.loginSuccess){
+      if(localStorage.getItem("token")!==null||this.props.loginSuccess){
           routes=(
           <Switch>
               <Route path='/resource' component={Resources}/>
               <Route path='/project' component={Project}/>
-              <Redirect to="/resource"/>
+              <Route path='/column' component={Column}/>
+              <Route path='/EditColumn' component={EditColumn}/>
+              <Redirect to="/project"/>
           </Switch>
           )
       }
 
-      let log = (<span>not logged</span>)
-      if(this.props.loginSuccess) {
+      let log = (<span style={{float:"right"}}>not logged</span>)
+      if(localStorage.getItem('token')) {
           log = (<span/>)
       }
     return (
-        <div>
-            <Menu/><Fragment>
-            <div><Top/>{log}</div>
+        <div className="all">
+            <Menu/>
+            <div>
+            <div className="top"><Top/>{log}</div>
             {routes}
-        </Fragment>
-
+            </div>
         </div>
     );
   }

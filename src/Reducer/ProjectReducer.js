@@ -10,31 +10,23 @@ const initialState={
 
 
 const load_All_Resources=(state,action)=>{
-    console.log("inReducer")
-    console.log()
-    console.log(action.allResource)
-    console.log(action.allResource[0])
+
     return Object.assign({},state,{allResource: action.allResource,addedResource: action.addedResource})
 }
 
 const load_All_Project_Success=(state,action)=>{
-    console.log(action.projectList)
-    console.log(action.projectList[0])
+
     return Object.assign({},state,{currentProject: action.projectList[0],allProject: action.projectList})
 }
 
 const deleteFromTable=(state,action)=>{
-    console.log("in delete reducer")
     const currentList = state.addedResource;
-    console.log(currentList)
-    console.log(action.resourceList)
+
     for(let key in currentList){
-        console.log("in for loop")
         action.resourceList.forEach(resource=>{
             console.log(currentList[key].id)
             console.log(resource.resourceId)
             if(currentList[key].id==resource.resourceId){
-                console.log("in ===")
                 currentList.splice(key,1);
             }
         })

@@ -11,3 +11,8 @@ export const load_All_Project_Success="load_All_Project_Success"
 export const delete_from_table="delete_from_table"
 
 export const Search = "Search";
+
+export const load_Column_Successful="load_Column_Successful";
+export const change_show_column="change_show_column";
+export const load_Only_Column_Successful="load_Only_Column_Successful";
+export const add_successful="add_successful";

@@ -4,9 +4,11 @@ import React from "react";
 
 const AllResources = (props)=>{
     return(
-        <div style={{display:"inline-block"}}>
-            <h4 style={{display:"inline-block"}}>Resource Catalog</h4><i className={"bi-arrow-right-circle"} style={{cursor:"pointer"}} onClick={props.addOnClick}/>
-            <table className={'myTable'}>
+        <div className='allDiv'>
+            <div>
+                <h4 style={{display:"inline"}}>Resource Catalog</h4><i className={"bi-arrow-right-circle"} style={{cursor:"pointer",display:"inline"}} onClick={props.addOnClick}/>
+            </div>
+            <table className='ProjectTb'>
                 <thead>
                 <tr>
                     <th> </th>

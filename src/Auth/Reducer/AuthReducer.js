@@ -5,12 +5,13 @@ const initialState={
     token:null,
     username:null,
     registerSuccess:null,
-    loginSuccess:false,
+    loginSuccess:null,
     err:null,
     createdTime:null
 }
 
 const loginSuccess=(state,action)=>{
+    localStorage.setItem("time",action.timeCreated)
     return Object.assign({},state,{
         username:action.username,
         token:action.token,

@@ -1,4 +1,4 @@
-.hidet{
+.hidetb{
     display: none;
     position: absolute;
     background-color: #f9f9f9;
@@ -8,13 +8,26 @@
     z-index: 1;
 }
 
-.showt{
+.showtb{
     display:block;
     position: absolute;
     background-color: #f9f9f9;
-    /*min-width: 160px;*/
-    /*max-width: 200px;*/
-    /*overflow: auto;*/
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+}
+
+.productTb{
+    border-collapse: collapse;
+    border: 1px solid black;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.ProductTh{
+    border:1px solid black;
+    background:lightgray;
+}
+
+.ProductTd{
+
 }

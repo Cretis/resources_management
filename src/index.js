@@ -10,13 +10,15 @@ import {BrowserRouter} from "react-router-dom";
 import AuthReducer from "./Auth/Reducer/AuthReducer";
 import ResourcesReducer from "./Reducer/ResourcesReducer";
 import ProjectReducer from "./Reducer/ProjectReducer";
+import ColumnReducer from "./Reducer/ColumnReducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     auth:AuthReducer,
     res:ResourcesReducer,
-    pro:ProjectReducer
+    pro:ProjectReducer,
+    col:ColumnReducer
 });
 
 const store = createStore(rootReducer,composeEnhancers(

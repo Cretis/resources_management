@@ -37,7 +37,9 @@ const SearchBar = (props)=>{
 
     return(
         <div className='dropPosition'>
-            <input type='text' id='search' onChange={onChangeHandler}/><button onClick={buttonClickHandler}>+</button>
+            <div className="searchLine">
+                <input type='text' id='search' onChange={onChangeHandler} placeholder="keyword"/><span className="searchSp">Resource Catalog</span><button onClick={buttonClickHandler} className="searchBu">+</button>
+            </div>
              <div className={showOrHide(props.classN)}>
                  {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                  <a onClick={addColumnHandler}>add Column</a>

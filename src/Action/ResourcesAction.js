@@ -70,11 +70,7 @@ export const loadAllResources = () => {
                     )
                 }
             );
-            // console.log("finalResourceList after all resources")
-            // console.log(finalResourceList);
             const projectColumnList = projectColumnResponse.data;
-            // console.log("projectColumnList:")
-            // console.log(projectColumnList)
             let columnsList = [];
             projectColumnList.forEach(projectColumn => {
                 columnsList.push({
@@ -84,26 +80,6 @@ export const loadAllResources = () => {
                 })
             })
 
-            // columnsList=projectColumnList.map(projectColumn => {
-            //     return (
-            //         columnsList.concat([{
-            //             columnId: projectColumn.columnId,
-            //             columnName: projectColumn.columnName,
-            //             columnValue: "1"
-            //         }])
-
-            // columnsList=[
-            //     ...columnsList,
-            //     {
-            //         columnId: projectColumn.columnId,
-            //         columnName: projectColumn.columnName,
-            //         columnValue: "1"
-            //     }
-            // ]
-            // )
-            // })
-            // console.log("columnList")
-            // console.log(columnsList)
 
             finalResourceList = finalResourceList.map(resource => {
                 let newList = new Array(columnsList.length)
@@ -118,15 +94,11 @@ export const loadAllResources = () => {
                     {
                         ...resource,
                         columns: newList
-                        // columns: JSON.parse(JSON.stringify(columnsList))
                     })
             })
 
-            // console.log("finalResourceList after project column")
-            // console.log(finalResourceList)
             const resourceDetailList = resourceDetailResponse.data;
-            // console.log("resourceDetailList:")
-            // console.log(resourceDetailList)
+
             finalResourceList.forEach(resource => {
                 resource.columns.forEach(column => {
                     const c = resourceDetailList.find(resourceDetail => resourceDetail.column.columnId === column.columnId && resourceDetail.resource.resourceId === resource.id)
@@ -139,9 +111,6 @@ export const loadAllResources = () => {
                     }
                 })
             })
-            console.log("finalResourceList:")
-            console.log(finalResourceList)
-            console.log(finalResourceList[0])
             dispatch(loadSuccess(finalResourceList))
         })).catch(err => {
             dispatch(loadResourceDetailErr(err))

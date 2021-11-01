@@ -3,13 +3,12 @@ import React from "react";
 
 
 const AddResources = (props)=>{
-    console.log("in AddResourcse")
-    console.log(props.addedResource)
-    console.log(props.willaddedResource)
     return(
-        <div style={{display:"inline-block"}}>
-            <h4 style={{display:"inline-block"}}>added resources</h4><span className={"bi-trash"} style={{cursor:"pointer"}} onClick={props.onDeleteClick}/>
-            <table>
+        <div className='addDiv'>
+            <div>
+                <h4 style={{display:"inline"}}>added resources</h4><span className={"bi-trash"} style={{cursor:"pointer",display:"inline"}} onClick={props.onDeleteClick}/>
+            </div>
+            <table className='ProjectTb'>
                 <thead>
                 <tr>
                     <th> </th>

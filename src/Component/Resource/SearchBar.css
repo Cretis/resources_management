@@ -21,7 +21,28 @@
 .dropPosition{
     position: relative;
     display: inline-block;
+    width: 100%;
 }
 a{
     display: block;
+}
+
+.searchLine{
+    background: grey;
+    width: 100%;
+}
+
+.searchBu{
+    float: right;
+    background: orangered;
+    border: none;
+    font-size: 13px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    margin-right: 3px;
+    margin-top: 2px;
+}
+.searchSp{
+
 }

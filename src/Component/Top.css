@@ -1,8 +1,10 @@
 .back{
     display: inline-block;
-    width: 700px;
+    position: relative;
+    height: 30px;
+    width: 92%;
 }
-.hide{
+.hidet{
     display: none;
     position: absolute;
     background-color: #f9f9f9;
@@ -12,10 +14,10 @@
     z-index: 1;
 }
 
-.show{
+.showt{
     display: block;
     position: absolute;
-    right: 50px;
+    right: 0;
     top:20px;
     background-color: #f9f9f9;
     min-width: 160px;
@@ -25,4 +27,12 @@
 }
 .butt{
     float: right;
+}
+.top-left-icon{
+    width: 200px;
+    background: orangered;
+    color: white;
+    height: 40px;
+    display: inline-table;
+    vertical-align: bottom;
 }

@@ -79,9 +79,6 @@ class Resources extends Component {
 
 
     render() {
-        console.log("renderParents")
-        console.log(this.state.show)
-        console.log(this.props.resources[0])
         return (
             <div>
                 <SearchBar

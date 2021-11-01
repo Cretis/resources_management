@@ -5,3 +5,15 @@
 .input_form{
     
 }
+.loginButton{
+    margin-top: 1rem;
+    background: orangered;
+    border: none;
+    width: 150px;
+    height: 30px;
+    color: white;
+}
+.regis{
+    display: inline-table;
+    vertical-align: bottom;
+}

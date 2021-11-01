@@ -69,7 +69,6 @@ export const loadProject=(username)=>{
 
             dispatch(loadProjectSuccess(allProject));
             dispatch(loadAll(allProject[0].projectId));
-
         }).catch(err=>{
             console.log(err);
         })
@@ -90,7 +89,6 @@ export const addResource=(resourceList,projectId)=>{
         axios.post(addResourceUrl,{resources:resourceIdList,projectId:projectId},{headers: {"Authorization": "Bearer " + localStorage.getItem("token")}}).then(
             response=>{
                 if(response.data==="add Successful"){
-                    console.log("before loadAll")
                     dispatch(loadAll(projectId));
                 }
             }
@@ -108,9 +106,6 @@ export const deleteFromTable=(resourceList)=>{
 
 export const deleteResource=(resourceList,projectId)=>{
     return dispatch=>{
-        console.log("in delete action:")
-        console.log(resourceList)
-        console.log(projectId)
         const deleteResourceUrl="http://localhost:8080/project//removeResources"
         let resourceIdList=[];
         resourceList.forEach(resource=>{

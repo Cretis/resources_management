@@ -1,11 +1,20 @@
-.myTable tbody{
-    overflow-y: scroll;
-}
 
-.myTable thead, tbody tr{
+
+.ProjectTb{
+    display: inline-table;
+    border-collapse: collapse;
+    border: 1px solid black;
     table-layout: fixed;
+    width: 100%;
 }
 
-.myTable thead tr th{
-    text-align: center;
+.allDiv{
+    width: 50%;
+    float: left;
 }
+
+.addDiv{
+    width: 50%;
+    float: left;
+}
+

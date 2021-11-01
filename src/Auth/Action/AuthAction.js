@@ -30,23 +30,12 @@ export const login = (username,password)=>{
             const jwt = response.data.jwt;
             localStorage.removeItem("token");
             localStorage.setItem("token",jwt);
+            localStorage.setItem("username",username);
             const timeCreated = response.data.time
             dispatch(loginSuccess(jwt,username,timeCreated));
         }).catch(err=>{
             dispatch(loginError(err))
         })
-        // return axios({
-        //     url:url,
-        //     method:'post',
-        //     params:loginData
-        // }).then(response=>{
-        //     console.log(response);
-        //     const jwt = response.data
-        //     dispatch(loginSuccess(jwt,username))
-        //
-        // }).catch(err=>{
-        //     dispatch(loginError(err))
-        // })
     };
 };
 

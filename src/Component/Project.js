@@ -24,7 +24,7 @@ class Project extends Component{
     }
 
     componentDidMount() {
-        this.props.loadProject(this.props.username);
+        this.props.loadProject(localStorage.getItem("username"));
     }
 
     addClickHandler=(event)=>{
@@ -134,17 +134,19 @@ class Project extends Component{
         return(
             <div>
                 <h1>{this.props.project.projectName}</h1>
-                <AllResources
-                    allResource = {this.props.allResource}
-                    checkBoxOnClick={this.checkBoxClickHandler}
-                    addOnClick={this.addClickHandler}
-                /><AddResources
+                <div>
+                    <AllResources
+                        allResource = {this.props.allResource}
+                        checkBoxOnClick={this.checkBoxClickHandler}
+                        addOnClick={this.addClickHandler}
+                    /><AddResources
                     addedResource={this.props.addedResource}
                     willaddedResource={this.state.willAddResource}
                     onDeleteClick ={this.deleteClickHandler}
                     checkBoxOnClick={this.addResourcesTableCheckBoxClickHandler}
                     deleteCheckBoxClick={this.deleteCheckBoxClickHandler}
                 />
+                </div>
                 <div><button onClick={this.submitOnClick}>submit</button></div>
             </div>
         )

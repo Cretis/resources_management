@@ -1,4 +1,8 @@
 .menu{
     display: inline-block;
-    float:right;
+    left:15%;
+    top:100px;
+    background: black;
+    color: white;
+    height: 100%;
 }

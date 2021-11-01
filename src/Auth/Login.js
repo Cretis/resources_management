@@ -65,6 +65,7 @@ class Login extends Component{
                 <h1>Login</h1>
             <form onSubmit={this.onSubmitHandler}>
                 <div>
+                    <div>Username:</div>
                 <input
                     type="text"
                     className={"input_form"+(showError('username')? "error":"")}
@@ -76,6 +77,7 @@ class Login extends Component{
                 />
                 </div>
                 <div>
+                    <div>Password:</div>
                     <input
                         type="text"
                         className={"input_form"+(showError('password')?"error":"")}
@@ -86,8 +88,9 @@ class Login extends Component{
                         onBlur={this.onBlurHandler('password')}
                     />
                 </div>
-                <button disabled={!show} type="submit">Login</button>
-                <NavLink to='/register' role='button'>Register</NavLink>
+                <button className="loginButton" disabled={!show} type="submit">Login</button>
+                <div><NavLink to='/register' role='button' className="regis">Register</NavLink></div>
+
             </form>
             </div>
         )

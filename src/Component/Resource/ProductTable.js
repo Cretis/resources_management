@@ -1,5 +1,6 @@
 import React from "react";
 import "./ProducTable.css"
+import {NavLink} from "react-router-dom";
 
 
 const ProductTable = (props)=>{
@@ -9,10 +10,10 @@ const ProductTable = (props)=>{
     const columnNameClickHandler = (event)=>{
         console.log("event:")
         console.log(event)
-        if(event.target.parentElement.children[1].className==="showt"){
-            event.target.parentElement.children[1].className="hidet";
+        if(event.target.parentElement.children[1].className==="showtb"){
+            event.target.parentElement.children[1].className="hidetb";
         }else{
-            event.target.parentElement.children[1].className="showt";
+            event.target.parentElement.children[1].className="showtb";
         }
     }
 
@@ -22,31 +23,31 @@ const ProductTable = (props)=>{
         console.log(columnId);
         console.log(event);
         props.updateColumnName(columnId,newValue);
-        event.target.parentElement.parentElement.className="hidet";
+        event.target.parentElement.parentElement.className="hidetb";
     }
 
     const deleteColumnClickHandler=(event)=>{
         const columnId = event.target.getAttribute('data-id');
         props.deleteColumn(columnId);
-        event.target.parentElement.parentElement.className="hidet";
+        event.target.parentElement.parentElement.className="hidetb";
     }
 
     let column = (
         <tr>
-            <th>name</th>
-            <th>id</th>
+            <th className="ProductTh">name</th>
+            <th className="ProductTh">id</th>
         </tr>
     )
     if (props.resources[0]){
         column=(
             <tr>
-                <th key="name">name</th>
-                <th key="id">id</th>
+                <th key="name" className="ProductTh">name</th>
+                <th key="id" className="ProductTh">id</th>
                 {
                     props.resources[0].columns.map((column)=> {
                         return (
-                            <th key={column.columnName}>{column.columnName}<span className={"bi-caret-down-fill"} style={{cursor: "pointer",fontSize:"10px"}} onClick={columnNameClickHandler}/>
-                                <div className="hidet">
+                            <th className="ProductTh" key={column.columnName}>{column.columnName}<span className={"bi-caret-down-fill"} style={{cursor: "pointer",fontSize:"10px"}} onClick={columnNameClickHandler}/>
+                                <div className="hidetb">
                                     <dl>
                                         <dt onClick={editColumnClickHandler} data-id={column.columnId} style={{cursor:"pointer"}}>edit column</dt>
                                         <dt onClick={deleteColumnClickHandler} data-id={column.columnId} style={{cursor:"pointer"}}>delete column</dt>
@@ -82,7 +83,7 @@ const ProductTable = (props)=>{
 
     return(
         <div>
-            <table>
+            <table className='productTb'>
                 <thead>
                     {column}
                 </thead>
@@ -90,12 +91,12 @@ const ProductTable = (props)=>{
                 {props.resources.map((resource)=>{
                     return(
                             <tr key={resource.id} data-resource={resource.id}>
-                                <td>{resource.name}</td>
-                                <td>{resource.id}</td>
+                                <td className="ProductTd">{resource.name}</td>
+                                <td className="ProductTd">{resource.id}</td>
                                 {
                                     resource.columns.map((column)=>{
                                         return(
-                                            <td id={column.columnId} contentEditable='true' onInput={onChangeHandler} onBlur={onBlurHandler} data-column={column.columnId}>{column.columnValue}</td>
+                                            <td className="ProductTd" id={column.columnId} contentEditable='true' onInput={onChangeHandler} onBlur={onBlurHandler} data-column={column.columnId}>{column.columnValue}</td>
                                         )
                                     })
                                 }
@@ -109,24 +110,5 @@ const ProductTable = (props)=>{
         </div>
     )
 }
-// class ProductTable extends Component{
-//
-//     render() {
-//         {rsources} = this.props
-//
-//         return(
-//             <div>
-//                 <table border='2'>
-//                     <thead>
-//                     <tr>
-//
-//                     </tr>
-//                     </thead>
-//
-//                 </table>
-//             </div>
-//         )
-//     }
-// }
 
 export default ProductTable;
