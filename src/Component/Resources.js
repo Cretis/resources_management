@@ -80,7 +80,7 @@ class Resources extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{float:"left",width:"70%",marginLeft:"10px"}}>
                 <SearchBar
                     onChange={this.searchBarChangeHandler}
                     classN={this.state.show}

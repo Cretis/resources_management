@@ -40,10 +40,10 @@ class App extends Component {
       }
     return (
         <div className="all">
-            <Menu/>
             <div>
             <div className="top"><Top/>{log}</div>
-            {routes}
+                <Menu/>{routes}
+
             </div>
         </div>
     );

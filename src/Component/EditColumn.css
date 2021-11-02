@@ -1,0 +1,8 @@
+.EditTb{
+    border-collapse: collapse;
+    border: 1px solid black;
+    table-layout: fixed;
+    display: inline-table;
+    float: left;
+    width: 30%;
+}

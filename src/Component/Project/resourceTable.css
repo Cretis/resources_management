@@ -6,6 +6,7 @@
     border: 1px solid black;
     table-layout: fixed;
     width: 100%;
+
 }
 
 .allDiv{
@@ -16,5 +17,12 @@
 .addDiv{
     width: 50%;
     float: left;
+}
+
+.ProjectTh{
+    border: 1px solid black;
+}
+
+.ProjectTd{
 }
 

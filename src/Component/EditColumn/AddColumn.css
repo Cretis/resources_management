@@ -1,0 +1,15 @@
+.AddTb{
+    border-collapse: separate;
+    border: 1px solid black;
+    table-layout: fixed;
+    width: 100%;
+    border-spacing: 0 10px;
+}
+.AddDiv{
+    float: left;
+    display: inline-block;
+    width: 70%;
+}
+.AddTd{
+    border: 1px solid lightgray;
+}

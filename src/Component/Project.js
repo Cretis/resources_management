@@ -132,8 +132,8 @@ class Project extends Component{
         console.log("in render")
         console.log(this.props.allResource)
         return(
-            <div>
-                <h1>{this.props.project.projectName}</h1>
+            <div style={{float:"left",width:"70%"}}>
+                <h1 style={{textAlign:"center"}}>{this.props.project.projectName}</h1>
                 <div>
                     <AllResources
                         allResource = {this.props.allResource}

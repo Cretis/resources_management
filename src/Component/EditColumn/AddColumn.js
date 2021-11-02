@@ -1,11 +1,11 @@
 import React from "react";
-import {renderToStaticMarkup} from "react-dom/server";
+import "./AddColumn.css"
 
 const AddColumn = (props)=>{
 
     const formula=(
-        <td>Formula
-            <input type='text'/>
+        <td className="AddTd">Formula
+            <input size="18" type='text'/>
         </td>
     )
 
@@ -28,11 +28,11 @@ const AddColumn = (props)=>{
     }
 
     return(
-        <div>
-            <table >
+        <div className="AddDiv">
+            <table className="AddTb">
                 <thead>
                 <tr>
-                    <th>
+                    <th colSpan="3">
                         Quantity Survey Fields
                     </th>
                 </tr>
@@ -41,9 +41,9 @@ const AddColumn = (props)=>{
                 {
                     props.times.map(n=>{
                         return(
-                            <tr>
-                                <td>Field<input type='text' id={n.num+"text"} onBlur={inputChange}/></td>
-                                <td>Type
+                            <tr style={{background:"orangered"}}>
+                                <td className="AddTd">Field<input type='text' id={n.num+"text"} size="18" onBlur={inputChange}/></td>
+                                <td className="AddTd"><div> Type</div>
                                     <select id={n.num+'select'} data-id={n.num} onChange={onChange}>
                                         <option value='number'>Number</option>
                                         <option value='text'> Text</option>
@@ -55,9 +55,9 @@ const AddColumn = (props)=>{
                         )
                     })
                 }
+                <tr><td colSpan="3"><button style={{float:"right"}} onClick={addRow}>add</button></td></tr>
                 </tbody>
             </table>
-            <button onClick={addRow}>add</button>
         </div>
     )
 }

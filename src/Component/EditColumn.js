@@ -2,8 +2,8 @@ import React,{Component} from "react";
 import {connect} from "react-redux";
 import {loadProjectColumn, changeShowStatus, addColumns} from "../Action/ColumnAction";
 import AddColumn from "./EditColumn/AddColumn"
-import Button from "../UI/Button/Button";
 import {Link, NavLink, Redirect} from "react-router-dom";
+import "./EditColumn.css"
 
 
 class EditColumn extends Component{
@@ -81,13 +81,12 @@ class EditColumn extends Component{
 
     render() {
         return (
-            <div>
-                <div style={{display:"inline-block"}}>
-                    <table>
+            <div style={{marginLeft:"20%",marginRight:"20%"}}>
+                <div style={{marginTop:"10%"}}>
+                    <table className="EditTb">
                         <thead>
                         <tr>
-                            <th>Project Scope Fields</th>
-                            <th> </th>
+                            <th colSpan="2">Project Scope Fields</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -105,17 +104,17 @@ class EditColumn extends Component{
                         }
                         </tbody>
                     </table>
+                        <AddColumn
+                            addClick={this.addClickHandler}
+                            times={this.state.keys}
+                            show={this.selectShowChangeHandler}
+                            hide={this.selectHideChangeHandler}
+                            inputChange={this.inputChangeHandler}
+                        />
                 </div>
-                <div style={{display:"inline-block"}}>
-                    <AddColumn
-                        addClick={this.addClickHandler}
-                        times={this.state.keys}
-                        show={this.selectShowChangeHandler}
-                        hide={this.selectHideChangeHandler}
-                        inputChange={this.inputChangeHandler}
-                    />
+                <div style={{marginTop:"10px"}}>
+                    <button style={{float:"right",marginTop:"10px"}} onClick={this.submitClickHandler}><NavLink to="/column">SAVE</NavLink></button>
                 </div>
-                <button onClick={this.submitClickHandler}><NavLink to="/column">submit</NavLink></button>
             </div>
         );
     }

@@ -1,0 +1,11 @@
+.ColumnTb{
+    border-collapse: collapse;
+    border: 1px solid black;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.ColumnTh{
+    border:1px solid black;
+    background:lightgray;
+}

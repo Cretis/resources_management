@@ -45,7 +45,7 @@ class Column extends Component{
 
     render() {
         return(
-            <div>
+            <div style={{float:"left",width:"80%"}}>
                 <ResourceTable
                     resourceList={this.props.columnResource}
                     onBlur={this.onBlurHandler}

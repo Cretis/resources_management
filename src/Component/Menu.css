@@ -1,8 +1,21 @@
-.menu{
-    display: inline-block;
-    left:15%;
-    top:100px;
+.menuShow{
+    display: inline;
     background: black;
     color: white;
+    float:left;
+    width: 20%;
     height: 100%;
+}
+
+.menuHide{
+    display: none;
+    background: black;
+    color: black;
+    float:left;
+    width: 5%;
+    height: 100%;
+}
+
+.bi-x{
+    display: inline-block;
 }
